@@ -1,28 +1,33 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-main>
+      <router-view>
+      </router-view>
+    </v-main>
+
+      <login :visible_login="loginDialogStatus"></login>
+
+      <register :visible_register="registerDialogStatus"></register>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import register from './components/authentication/RegisterLayout.vue'
+import login from './components/authentication/Login.vue'
+import VUEX_GETTERS from '@/vuex/vuex-getters.js'
+import { mapGetters } from 'vuex'
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
+    login,
+    register
+  },
+
+  computed: {
+    ...mapGetters({
+      loginDialogStatus: VUEX_GETTERS.loginDialogStatus,
+      registerDialogStatus: VUEX_GETTERS.registerDialogStatus,
+    }),
+  },
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>

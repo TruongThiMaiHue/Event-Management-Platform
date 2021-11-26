@@ -1,0 +1,222 @@
+<template>
+  <v-dialog
+      :value="visible_register"
+      fullscreen
+      hide-overlay
+      persistent
+  >
+      <login-and-register-layout>
+          <div class="register-container">
+              <div class="register--main-content">
+                  <div class="register--main-content__header">Create new user account</div>
+
+                  <div class="register--main-content__description">Please enter your information below to setup your account</div>
+                  
+                  <div class="register--main-content__input">
+                      <v-text-field
+                          placeholder="Placeholder"
+                          label="Fullname"
+                          :rules="rules"
+                          hide-details="auto"
+                          outlined
+                      >
+                      </v-text-field>
+
+                       <v-text-field
+                          v-model="first"
+                          label="Preferred name"
+                          :rules="rules"
+                          hide-details="auto"
+                          outlined
+                      >
+                      </v-text-field>
+
+                      <v-text-field
+                          label="Phone number"
+                          hide-details="auto"
+                          outlined
+                      >
+                      </v-text-field>
+
+                      <v-text-field
+                          label="Email address"
+                          :rules="rules"
+                          hide-details="auto"
+                          outlined
+                      >
+                      </v-text-field>
+
+                      <v-text-field
+                          label="Username"
+                          :rules="rules"
+                          hide-details="auto"
+                          outlined
+                      >
+                      </v-text-field>
+
+                      <v-text-field
+                          v-model="password"
+                          :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                          label="Password"
+                          :rules="rules"
+                          hide-details="auto"
+                          :type="show1 ? 'text' : 'password'"
+                          @click:append="show1 = !show1"
+                          outlined
+                      >
+                      </v-text-field>
+                  </div>
+
+                  <div class = "register--main-content__action">
+                      <div class="action-empty"></div>
+                      <div class="action-button">
+                          <button>
+                              Next
+                          </button>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="register--footer-content">
+                  Already have an account? 
+                  <span @click="updateLoginDialog(); updateRegisterDialog()"><a>Log in</a></span> 
+              </div>
+          </div>
+
+
+
+          
+      </login-and-register-layout>
+  </v-dialog>
+</template>
+
+<script>
+import LoginAndRegisterLayout from './layout/LoginAndRegisterLayout.vue'
+import { mapActions } from 'vuex'
+import VUEX_ACTIONS from '@/vuex/vuex-actions.js';
+export default {
+  name:"register",
+
+  components: { 
+      LoginAndRegisterLayout 
+  },
+  
+  data: () => ({
+      rules: [
+          value => !!value || 'Required.',
+          value => (value && value.length >= 3) || 'Min 3 characters',
+      ],
+      show1: false,
+      password: 'Password',
+      first: 'name'
+  }),
+
+  props: {
+      visible_register: { type: Boolean }
+  },
+
+  methods: {
+      ...mapActions({
+          $_updateLoginDialog: VUEX_ACTIONS.updateLoginDialogVisible,
+          $_updateRegisterDialog: VUEX_ACTIONS.updateRegisterDialogVisible,
+      }),
+
+      updateLoginDialog() {
+          const loginDialogVisible = true
+          this.$_updateLoginDialog(loginDialogVisible);
+      },
+
+      updateRegisterDialog() {
+          const newRegisterDialogVisible = false
+          this.$_updateRegisterDialog(newRegisterDialogVisible);
+      },
+  },
+}
+</script>
+
+<style>
+.v-input__control {
+  margin: 25px 0;
+}
+
+.v-text-field.v-text-field--enclosed .v-text-field__details {
+  position: absolute;
+  z-index: 5;
+  margin-top: 60px
+}
+
+.register-container {
+  position: relative;
+  padding: 0px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: white;
+}
+.register--main-content {
+  width: 660px;
+}
+.register--main-content__header {
+  font-family: 'Quicksand';
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 37px;
+  color: #37474F;
+}
+.register--main-content__description{
+  font-family: 'Roboto', sans-serif;            
+  font-size: 16px;
+  line-height: 19px;
+  color: #546E7A;
+  padding-top: 10px;
+}
+
+.register--main-content__input {
+  margin-top: 25px;
+}
+
+.register--main-content__action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+}
+.action-empty {
+  font-family: 'Roboto', sans-serif;            
+  font-size: 16px;
+  line-height: 19px;
+  color: #1E88E5;
+}
+
+.action-button button {
+  width: 76px;
+  height: 36px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  background: #1E88E5;
+  font-family: 'Roboto', sans-serif;    
+  font-size: 16px;  
+  letter-spacing: 1.5px;
+}
+
+
+
+.register--footer-content {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  bottom: 20px;
+  font-family: 'Roboto', sans-serif;    
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 19px;
+  color: #546E7A;
+}
+
+a {
+  color: #1E88E5;
+  text-decoration: none;
+}
+</style>
