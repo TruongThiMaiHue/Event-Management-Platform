@@ -3,7 +3,7 @@
  <the-header></the-header>
  <div :class="container">
     <div></div>
-    <the-sidebar :></the-sidebar>
+    <!-- <the-sidebar ></the-sidebar> -->
 
     <the-footer></the-footer>
  </div>
@@ -14,21 +14,24 @@
 
 <script>
   import TheHeader from './home-components/TheHeader.vue';
-    import TheSidebar from './home-components/TheSidebar.vue';
+    // import TheSidebar from './home-components/TheSidebar.vue';
   import TheFooter from './home-components/TheFooter.vue';
 
   export default {
     name: "Home",
     components: {
       TheHeader,
-      TheSidebar,
+      // TheSidebar,
       TheFooter
     },
+    data: () => ({
+      visible: false
+    }),
       computed: {
-        personalRoleRowClasses() {
+        container() {
             return [
                 'container',
-                this.roles === 'personal' ? 'oiSidebar' : '',
+                this.visible === true ? 'oiSidebar' : '',
             ];
         },
       }
@@ -48,6 +51,9 @@
   padding: 0 !important;
   height: 100%;
   max-width: 100% !important;
+}
+.oiSidebar{
+    grid-template-columns: 0 1fr;
 }
 
 </style>
