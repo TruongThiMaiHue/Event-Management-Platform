@@ -1,9 +1,7 @@
 const VUEX_ACTIONS = {
     updateLoginDialogVisible: 'updateLoginDialogVisible',
     updateRegisterDialogVisible: 'updateRegisterDialogVisible',
-    userPassword: 'updateUserPassword',
-    updateStep1st: 'updateStep1st'
-
+    newUser: 'newUser'
 };
 
 export default VUEX_ACTIONS;

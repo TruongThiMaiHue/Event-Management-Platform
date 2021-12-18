@@ -17,6 +17,7 @@
 </script>
 
 <style scoped>
+    @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600;700&family=Roboto:wght@100&display=swap');
     .left {
         display: flex;
         justify-content: center;

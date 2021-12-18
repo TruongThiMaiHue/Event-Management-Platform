@@ -29,7 +29,7 @@ export default {
 }
 .register--main-content__header {
     font-family: 'Quicksand';
-    font-weight: bold;
+    font-weight: 600;
     font-size: 30px;
     line-height: 37px;
     color: #37474F;

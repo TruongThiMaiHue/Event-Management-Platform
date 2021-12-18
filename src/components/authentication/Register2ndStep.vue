@@ -127,16 +127,10 @@ export default {
             this.$emit('active-additon-step', this.isSelected)
         },
         roles() {
-            this.$emit('save-role', this.roles)
+            this.$emit('user-information-role', this.roles)
         }
 
     },
-    methods: {
-        sentUserInfo() {
-            this.$emit('user-information-role', this.roles)
-        },
-    },
-   
 }
 </script>
 
@@ -177,8 +171,8 @@ export default {
 }
 
 .register--main-content__header {
-    font-family: 'Quicksand';
-    font-weight: bold;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
     font-size: 30px;
     line-height: 37px;
     color: #37474F;

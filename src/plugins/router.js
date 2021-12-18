@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Admin from '../components/AdminDashboard.vue'
-import EventTemplate from '../components/child-components/EventTemplate.vue'
-import HomeTemplate from '../components/child-components/HomeTemplate.vue'
-import RegisterLayout from '../components/authentication/RegisterLayout.vue'
-
+import home from '../components/Home.vue'
+import admin from '../components/Admin.vue'
+import homeTemplate from '../components/admin-components/HomeTemplate.vue'
+import eventTemplate from '../components/admin-components/EventTemplate.vue'
 
 Vue.use(VueRouter)
 
@@ -13,28 +12,28 @@ export const router = new VueRouter({
     routes: [
         {
             path: '/',
-            component: RegisterLayout,
-            props: true
+            component: home,
+            name: 'home',
+            props: true,
             
         },
-
         {
             path: '/admin',
-            component: Admin,
+            name: 'admin',
+            component: admin,
             props: true,
             children: [
                 {
-                    path: 'home',
-                    component: HomeTemplate
+                    path: 'dashboard',
+                    name: 'dashboard',
+                    component: homeTemplate
                 },
                 {
-                    name: 'eventTemplate',
-                    path: 'events/:eventId',
-                    component: EventTemplate
-                }
+                    path: 'event',
+                    name: 'event',
+                    component: eventTemplate
+                },
             ]
-            
-        },
-        
+        }
     ]
 })

@@ -9,8 +9,8 @@
                 <div class="form-container">
                     <v-text-field
                         class="input--text-filed"
-                        v-model="userGeneralInformation.fullName"
-                        :rules="rules.fullName"
+                        v-model="userGeneralInformation.fullname"
+                        :rules="rules.fullname"
                         label="Full Name"
                         required
                         color="#546E7A"
@@ -21,6 +21,7 @@
                         class="input--text-filed"
                         label="Preferred name"
                         placeholder="What are you called in daily life?"
+                        v-model="userGeneralInformation.preferedname"
                         required
                         outlined
                         color="#546E7A"
@@ -48,9 +49,9 @@
 
                     <v-text-field 
                         class="input--text-filed"
-                        v-model="userGeneralInformation.userName"
+                        v-model="userGeneralInformation.username"
                         label="Username"
-                        :rules="rules.userName"
+                        :rules="rules.username"
                         outlined
                         color="#546E7A"
                     >
@@ -105,7 +106,7 @@ export default {
     
     data: () => ({
         rules: {
-            fullName: [
+            fullname: [
                 value => !!value || 'Required',
             ],
 
@@ -118,36 +119,32 @@ export default {
                 value => !value || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value) || 'Invalid e-mail address'
             ],
 
-            userName: [
+            username: [
                 value => !!value || 'Required',
             ],
 
             password: [   
-                value => !!value,
-                value => value.length >= 10,
+                value => !!value || 'Required',
+                value => value.length >= 5,
                 value => zxcvbn(value).score >= 1,
             ]
         },
 
         show: false,
         userGeneralInformation: {
+            username:'',
+            preferedname:'',
             password: '',
-            fullName: '',
+            fullname: '',
             email: '',
-            userName:'',
             phone:'',
         },
     }),
 
     computed: {    
-        formIsValid() {
-            return this.userGeneralInformation && !!this.userGeneralInformation.userName;
-        },
-
         score () {
-            const result = zxcvbn(this.userGeneralInformation.password);
-        
-            switch (result.score) {
+            const passRules = zxcvbn(this.userGeneralInformation.password);
+            switch (passRules.score) {
                 case 3:
                     return {
                         color: "#00CC83",
@@ -175,6 +172,13 @@ export default {
                     };
             }
         },
+        formIsValid() {
+            return this.userGeneralInformation 
+            && !!this.userGeneralInformation.email
+            && !!this.userGeneralInformation.fullname
+            && !!this.userGeneralInformation.username
+            && zxcvbn(this.userGeneralInformation.password).score >= 1
+        },
     },
 
     watch: {
@@ -185,22 +189,17 @@ export default {
 
         userGeneralInformation: {
             handler() {
-                console.log('asd');
+                this.$emit('user-information-general', this.userGeneralInformation)
             },
 
             deep: true,
         },
-    },
-
-    methods: {
-        sentUserInfo() {
-            this.$emit('user-information-general', this.userGeneralInformation)
-        },
-    },
+    }
 }
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;600;700&family=Roboto:wght@100&display=swap');
 .password-detail--description {
     font-size: 14px;
     color: #78909c;
@@ -231,8 +230,8 @@ export default {
     align-items: center;
 }
 .register--main-content__header {
-    font-family: 'Quicksand';
-    font-weight: bold;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
     font-size: 30px;
     line-height: 37px;
     color: #37474F;

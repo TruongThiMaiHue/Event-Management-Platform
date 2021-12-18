@@ -29,16 +29,6 @@
     >
       Register
     </v-btn>    
-
-    <v-app-bar-title color="black">{{fullname}}</v-app-bar-title>
-
-    <!-- <img 
-    id="avatar"
-    src="../../assets/image 2.png"
-    />
-    <img class="ml-2 mt-1"
-    src="../../assets/arrow.png"
-    /> -->
   </v-app-bar>
 </template>
 
@@ -52,11 +42,6 @@ export default {
     return {
       fullname: null
     }
-  },
-  mounted () {
-    this.$root.$on('user-login-fullname', (a) => {
-        this.fullname = a;
-    })
   },
 
   methods: {

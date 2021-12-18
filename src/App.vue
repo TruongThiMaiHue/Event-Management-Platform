@@ -5,9 +5,9 @@
       </router-view>
     </v-main>
 
-      <login :visible_login="loginDialogStatus"></login>
+    <login :visible_login="loginDialogStatus"></login>
 
-      <register :visible_register="registerDialogStatus"></register>
+    <register :visible_register="registerDialogStatus"></register>
   </v-app>
 </template>
 
@@ -27,6 +27,7 @@ export default {
     ...mapGetters({
       loginDialogStatus: VUEX_GETTERS.loginDialogStatus,
       registerDialogStatus: VUEX_GETTERS.registerDialogStatus,
+      users: VUEX_GETTERS.users,
     }),
   },
 }

@@ -65,8 +65,9 @@
 
 <script>
 import LoginAndRegisterLayout from './layout/LoginAndRegisterLayout.vue'
-import { mapActions } from 'vuex'
-import VUEX_ACTIONS from '@/vuex/vuex-actions.js';
+import { mapActions, mapGetters } from 'vuex'
+import VUEX_ACTIONS from '@/vuex/vuex-actions.js'
+import VUEX_GETTERS from '@/vuex/vuex-getters.js';
 
 export default {
     name: 'login',
@@ -82,45 +83,37 @@ export default {
         ],
         name:'',
         pass:'',
-
-        userInfo :{
-            username: null,
-            fullname: null,
-            password: null
-        }
     }),
 
     props: {
         visible_login: { type: Boolean }
     },
 
-    mounted () {
-        this.$root.$on('user-name', (a) => {
-            this.userInfo.username = a;
-        })
-        this.$root.$on('user-pass', (a) => {
-            this.userInfo.password = a;
-        })
-        this.$root.$on('user-fullname', (a) => {
-            this.userInfo.fullname = a;
-        })
-    },
-
     watch: {
         visible_login(visible) {
             if (!visible) {
-                this.$refs.form.reset();
+                this.$refs.form.reset()
             }
         },
     },
 
     computed: {
-        isUser: function() {
-            return (this.userInfo.username === this.name && this.userInfo.password === this.pass)
+        ...mapGetters({
+            users: VUEX_GETTERS.users,
+        }),
+        isUser() { 
+            let isUser = {}
+            this.users.forEach(user => {
+                if (user.username === this.name && user.password === this.pass) {
+                    isUser = user
+                }
+            })
+            return isUser
         }
     },
 
     methods: {
+        
         ...mapActions({
             $_updateRegisterDialog: VUEX_ACTIONS.updateRegisterDialogVisible,
             $_updateLoginDialog: VUEX_ACTIONS.updateLoginDialogVisible,
@@ -143,9 +136,15 @@ export default {
             }
 
             const newLoginDialogVisible = false
-            if (this.isUser === true) {
+            if (this.isUser !== {}) {
                 this.$_updateLoginDialog(newLoginDialogVisible) 
-                this.$root.$emit('user-login-fullname', this.userInfo.fullname)
+                console.log(`lala ${this.isUser.fullname}`)
+                this.$router.push ({
+                    name:"admin",
+                    params: {
+                        fullName: this.isUser.fullname
+                    }
+                })
             } else {
                 alert('meo')
             
@@ -176,8 +175,8 @@ export default {
 }
 
 .login--main-content__header {
-    font-family: 'Quicksand';
-    font-weight: bold;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
     font-size: 30px;
     line-height: 37px;
     color: #37474F;

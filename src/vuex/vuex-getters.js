@@ -1,12 +1,7 @@
 const VUEX_GETTERS = {
-    userFullname: 'userFullname',
-    userEmail: 'userEmail',
-    userName: 'userName',
-    userPass: 'userPass',
-    step1st: 'step1st',
-
     loginDialogStatus: 'loginDialogStatus',
-    registerDialogStatus: 'registerDialogStatus'
+    registerDialogStatus: 'registerDialogStatus',
+    users: 'users'
 };
 
 export default VUEX_GETTERS;
