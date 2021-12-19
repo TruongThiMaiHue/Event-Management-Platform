@@ -14,7 +14,7 @@
     
         <v-spacer></v-spacer>
 
-        <v-app-bar-title>{{fullName}}lolo</v-app-bar-title>
+        <v-app-bar-title>{{fullName}}</v-app-bar-title>
 
         <img 
             id="avatar"
