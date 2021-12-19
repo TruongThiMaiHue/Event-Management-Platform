@@ -1,26 +1,11 @@
 <template>
-  <div>
-      <div>Event</div>
-      <div>Event</div>
-      <div>Event</div>
-      <div>Event</div>
-      <div>Event</div>
-      <div>Event</div>
-      <div>Event</div>
-      <div>Event</div>
-
-
-      <div> {{dataOverRoute}} </div>
-      
-  </div>
+    <div>
+        <div>Event</div>
+    </div>
 </template>
 
 <script>
-  export default {
-    name: 'event',
-
-    props: {
-      dataOverRoute: { type: Object }
+    export default {
+        name: 'event',
     }
-  }
 </script>

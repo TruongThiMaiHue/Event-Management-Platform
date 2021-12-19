@@ -138,9 +138,9 @@ export default {
             const newLoginDialogVisible = false
             if (this.isUser !== {}) {
                 this.$_updateLoginDialog(newLoginDialogVisible) 
-                console.log(`lala ${this.isUser.fullname}`)
+                console.log(this.isUser.fullname)
                 this.$router.push ({
-                    name:"admin",
+                    name:"dashboard",
                     params: {
                         fullName: this.isUser.fullname
                     }

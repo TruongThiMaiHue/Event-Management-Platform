@@ -1,10 +1,11 @@
 <template>
   <v-app-bar app
-    background-color="white"
     height="72"
+    class="header-bar"
   >
     <v-img
       alt="Logo"
+      id="logo"
       class="shrink mr-2"
       contain
       src="../../assets/Group 11.png" 
@@ -14,21 +15,9 @@
   
     <v-spacer></v-spacer>
 
-    <v-btn
-      color="warning"
-      dark
-      @click="updateLoginDialog()"
-    >
-      Login
-    </v-btn>
-
-      <v-btn
-      color="primary"
-      dark
-      @click="updateRegisterDialog()"
-    >
-      Register
-    </v-btn>    
+    <div class="action-login">
+      <button type ="submit" @click="updateLoginDialog()">Log In</button>
+    </div>
   </v-app-bar>
 </template>
 
@@ -54,40 +43,40 @@ export default {
         const loginDialogVisible = true
         this.$_updateLoginDialog(loginDialogVisible);
     },
-
-    updateRegisterDialog() {
-        const registerDialogVisible = true
-        this.$_updateRegisterDialog(registerDialogVisible);
-    }
   },
 
 }
 </script>
 
 <style scoped>
+  .header-bar {
+    background-color: white !important;
+  }
   .dialog{
     height: 100%;
   }
-
-  .right-icon-out {
-    position: absolute;
-    right: 30px;
-    top: 30px;
-    z-index: 4
-  }
-
   #avatar {
     display: absolute;
     border-radius: 25px;
     margin-left:20px;
     right: 0
   }
-
-  .v-main {
-    margin-left: 250px;
-  }
-
   .v-app-bar-title {
     font-size: 14px
   }
+  #logo {
+    margin-left:10px ;
+    margin-top:5px ;
+  }
+  .action-login button {
+    width: 76px;
+    height: 36px;
+    border: none;
+    background: #FF6E40;
+    border-radius: 4px;
+    color: white;
+    font-family: 'Roboto', sans-serif;    
+    font-size: 16px;  
+    letter-spacing: 2px; 
+}
 </style>
